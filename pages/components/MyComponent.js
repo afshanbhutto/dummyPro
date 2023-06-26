@@ -27,14 +27,14 @@ const MyComponent = () => {
             <WhatsappIcon size={32} round />
           </WhatsappShareButton>
 
-          <FacebookShareButton url={url} quote={shareText}>
+          <FacebookShareButton url={window.location.href} quote={shareText}>
             <FacebookIcon size={32} round />
           </FacebookShareButton>
 
           <TwitterShareButton url={url} title={shareText}>
             <TwitterIcon size={32} round />
           </TwitterShareButton>
-          <a href={`sms:&body=${encodeURIComponent(message)}`}>
+          <a href={`sms:;body=${encodeURIComponent(message)}`}>
             <IoChatbubblesOutline size={32} />
           </a>
         </div>
