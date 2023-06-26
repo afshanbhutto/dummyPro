@@ -19,7 +19,7 @@ const MyComponent = () => {
     if (uploadedFile) {
       const url = URL.createObjectURL(uploadedFile);
       const shareText = "Check out this file!";
-      const message = `Hey, take a look at this file: ${url}`;
+      const messageBody = `Hey, take a look at this file: ${url}%0D%0A%0D%0A${shareText}`;
 
       return (
         <div>
@@ -34,7 +34,7 @@ const MyComponent = () => {
           <TwitterShareButton url={url} title={shareText}>
             <TwitterIcon size={32} round />
           </TwitterShareButton>
-          <a href={`sms:;body=${encodeURIComponent(message)}`}>
+          <a href={`sms:&body=${encodeURIComponent(messageBody)}`}>
             <IoChatbubblesOutline size={32} />
           </a>
         </div>
