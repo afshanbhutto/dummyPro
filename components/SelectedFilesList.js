@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -189,7 +189,7 @@ function SelectedFilesList({ selectedFiles }) {
         </div>
       </div>
 
-      {showQrCode ? (
+      {showQrCode && (
         <div className="bg-slate-400 flex flex-col items-center">
           <div className="qr-code-container">
             <img src={qrCodeImageSrc} alt="QR Code" width="100" height="100" />
@@ -201,30 +201,30 @@ function SelectedFilesList({ selectedFiles }) {
             <input type="password" placeholder="SET A PASSWORD" />
           </div>
         </div>
-      ) : null}
+      )}
 
-      {showWhatsapp ? (
+      {showWhatsapp && (
         <div className="bg-slate-400">
           <WhatsappShareButton url="https://example.com/share-url">
             Share on Whatsapp
           </WhatsappShareButton>
         </div>
-      ) : null}
+      )}
 
-      {showFacebookShare ? (
+      {showFacebookShare && (
         <div className="bg-slate-400">
           <FacebookShareButton url="https://example.com/">
             Share on Facebook
           </FacebookShareButton>
         </div>
-      ) : null}
-      {showTwitter ? (
+      )}
+      {showTwitter && (
         <div className="bg-slate-400">
           <TwitterShareButton url="https://example.com/share-url">
             Share on Twitter
           </TwitterShareButton>
         </div>
-      ) : null}
+      )}
     </>
   );
 }
