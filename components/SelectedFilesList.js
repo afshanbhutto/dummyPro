@@ -16,7 +16,6 @@ function SelectedFilesList({ selectedFiles }) {
   const [showTwitter, setShowTwitter] = useState(false);
   const [showWhatsapp, setShowWhatsapp] = useState(false);
   const [qrCodeImageSrc, setQrCodeImageSrc] = useState("");
-  const [messageContent, setMessageContent] = useState("");
   const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
@@ -121,32 +120,13 @@ function SelectedFilesList({ selectedFiles }) {
     }
   };
 
-  function handleClickForMessage() {
+  const handleClickForMessage = () => {
     const link = "https://example.com/qr-code";
     const messageBody = `Check out this link: ${link}`;
 
-    if ("contacts" in navigator && "ContactsManager" in window) {
-      navigator.contacts
-        .select(["name", "tel"])
-        .then((contacts) => {
-          if (contacts.length > 0) {
-            const recipient = contacts[0];
-            const recipientName = recipient.name[0];
-            const recipientPhoneNumber = recipient.tel[0].value;
-
-            const smsUri = `sms:${recipientPhoneNumber}?body=${encodeURIComponent(
-              messageBody
-            )}`;
-            window.location.href = smsUri;
-          }
-        })
-        .catch((error) => {
-          console.error("Error selecting contact:", error);
-        });
-    } else {
-      console.error("Contact Picker API is not supported.");
-    }
-  }
+    const smsUri = `sms:?body=${encodeURIComponent(messageBody)}`;
+    window.location.href = smsUri;
+  };
 
   const handleClickForFacebook = () => {
     const shareableUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
