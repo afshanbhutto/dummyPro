@@ -24,7 +24,7 @@ function FileItem({ file }) {
   }
 
   return (
-    <div className="container mx-auto w-full bg-slate-300 flex items-center justify-center">
+    <div className="container mx-auto  bg-slate-300 flex flex-wrap items-center justify-center">
       {getFileIcon(fileType)}
       <span className="flex-1">{fileName}</span>
       <span className="flex-1 ">{` (${fileType})`}</span>
