@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import { BsQrCode } from "react-icons/bs";
+import { FaWhatsapp, FaTwitter, FaMessage } from "react-icons/fa";
 import { AiOutlineLink } from "react-icons/ai";
 import { BiSolidLockAlt } from "react-icons/bi";
-import { FacebookIcon, TwitterIcon, WhatsappIcon } from "react-share";
+import { GrFacebookOption } from "react-icons/gr";
 import QRCode from "qrcode";
 import { saveAs } from "file-saver";
 
@@ -189,7 +190,11 @@ function SelectedFilesList({ selectedFiles }) {
             onClick={handleWhatsappClick}
           >
             <div id="icon">
-              <WhatsappIcon size={32} round />
+              <FaWhatsapp
+                size={30}
+                round
+                className="text-white bg-[#25D366] p-1 rounded-full"
+              />
             </div>
             <div id="platform-name" className="uppercase">
               WHastsapp
@@ -214,7 +219,11 @@ function SelectedFilesList({ selectedFiles }) {
             onClick={handleFacebookClick}
           >
             <div id="icon">
-              <FacebookIcon size={32} round />
+              <GrFacebookOption
+                size={30}
+                round
+                className="text-white bg-[#4267B2] p-1.5 rounded-full"
+              />
             </div>
             <div id="platform-name" className="uppercase">
               Facebook
@@ -226,7 +235,11 @@ function SelectedFilesList({ selectedFiles }) {
             onClick={handleTwitterClick}
           >
             <div id="icon">
-              <TwitterIcon size={32} round />
+              <FaTwitter
+                size={30}
+                round
+                className="text-white bg-[#1DA1F2] p-1.5 rounded-full"
+              />
             </div>
             <div id="platform-name" className="uppercase">
               Twitter
@@ -284,7 +297,11 @@ function SelectedFilesList({ selectedFiles }) {
             onClick={handleClickForWhatsapp}
           >
             <div id="icon">
-              <WhatsappIcon size={32} round />
+              <FaWhatsapp
+                size={30}
+                round
+                className="text-white bg-[#25D366] p-1 rounded-full"
+              />
             </div>
             <button onClick={handleClickForWhatsapp}>Share on WhatsApp</button>
           </button>
@@ -312,7 +329,11 @@ function SelectedFilesList({ selectedFiles }) {
             onClick={handleClickForFacebook}
           >
             <div id="icon">
-              <FacebookIcon size={32} round />
+              <GrFacebookOption
+                size={30}
+                round
+                className="text-white bg-[#4267B2] p-1.5 rounded-full"
+              />
             </div>
             <button onClick={handleClickForFacebook}>Share on Facebook</button>
           </button>
@@ -325,7 +346,11 @@ function SelectedFilesList({ selectedFiles }) {
             onClick={handleClickForTwitter}
           >
             <div id="icon">
-              <TwitterIcon size={32} round />
+              <FaTwitter
+                size={30}
+                round
+                className="text-white bg-[#1DA1F2] p-1.5 rounded-full"
+              />
             </div>
             <button onClick={handleClickForTwitter}>Share on Twitter</button>
           </button>
