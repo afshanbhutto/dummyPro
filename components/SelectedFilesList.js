@@ -121,20 +121,32 @@ function SelectedFilesList({ selectedFiles }) {
     }
   };
 
-  const handleClickForMessage = () => {
+  function handleClickForMessage() {
     const link = "https://example.com/qr-code";
-    setMessageContent(link);
+    const messageBody = `Check out this link: ${link}`;
 
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if ("contacts" in navigator && "ContactsManager" in window) {
+      navigator.contacts
+        .select(["name", "tel"])
+        .then((contacts) => {
+          if (contacts.length > 0) {
+            const recipient = contacts[0];
+            const recipientName = recipient.name[0];
+            const recipientPhoneNumber = recipient.tel[0].value;
 
-    if (isMobile) {
-      const shareableLink = `sms:&body=${encodeURIComponent(link)}`;
-      window.location.href = shareableLink;
+            const smsUri = `sms:${recipientPhoneNumber}?body=${encodeURIComponent(
+              messageBody
+            )}`;
+            window.location.href = smsUri;
+          }
+        })
+        .catch((error) => {
+          console.error("Error selecting contact:", error);
+        });
     } else {
-      const webShareableLink = `sms:?body=${encodeURIComponent(link)}`;
-      window.open(webShareableLink, "_blank");
+      console.error("Contact Picker API is not supported.");
     }
-  };
+  }
 
   const handleClickForFacebook = () => {
     const shareableUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
