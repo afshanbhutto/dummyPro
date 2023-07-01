@@ -24,7 +24,7 @@ function FileUploadComponent() {
   }
 
   return (
-    <div className="flex bg-slate-600 container h-4/5 mx-auto items-center">
+    <div className="flex bg-slate-600 container h-4/5 mx-auto items-center flex-col md:flex-row">
       <FileDropZone
         getRootProps={getRootProps}
         getInputProps={getInputProps}
