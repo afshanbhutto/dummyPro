@@ -16,6 +16,8 @@ function SelectedFilesList({ selectedFiles }) {
   const [showTwitter, setShowTwitter] = useState(false);
   const [showWhatsapp, setShowWhatsapp] = useState(false);
   const [qrCodeImageSrc, setQrCodeImageSrc] = useState("");
+  const [messageContent, setMessageContent] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     if (showQrCode) {
@@ -46,6 +48,7 @@ function SelectedFilesList({ selectedFiles }) {
     setShowFacebookShare(false);
     setShowTwitter(false);
     setShowWhatsapp(false);
+    setShowMessage(false);
   };
 
   const handleDownloadClick = async () => {
@@ -70,6 +73,7 @@ function SelectedFilesList({ selectedFiles }) {
   const handleFacebookClick = () => {
     setShowQrCode(false); // Hide QR code
     setShowFacebookShare(true);
+    setShowMessage(false);
     setShowTwitter(false); // Hide Twitter content
     setShowWhatsapp(false); // Hide WhatsApp content
   };
@@ -78,6 +82,7 @@ function SelectedFilesList({ selectedFiles }) {
     setShowQrCode(false); // Hide QR code
     setShowFacebookShare(false); // Hide Facebook content
     setShowTwitter(true);
+    setShowMessage(false);
     setShowWhatsapp(false); // Hide WhatsApp content
   };
 
@@ -86,6 +91,15 @@ function SelectedFilesList({ selectedFiles }) {
     setShowFacebookShare(false); // Hide Facebook content
     setShowTwitter(false); // Hide Twitter content
     setShowWhatsapp(true);
+    setShowMessage(false);
+  };
+
+  const handleMessageClick = () => {
+    setShowQrCode(false); // Hide QR code
+    setShowFacebookShare(false); // Hide Facebook content
+    setShowTwitter(false); // Hide Twitter content
+    setShowWhatsapp(false);
+    setShowMessage(true);
   };
 
   const url = "https://example.com";
@@ -104,6 +118,21 @@ function SelectedFilesList({ selectedFiles }) {
         `${title} - ${url}`
       )}`;
       window.open(webShareableUrl, "_blank");
+    }
+  };
+
+  const handleClickForMessage = () => {
+    const link = "https://example.com/qr-code";
+    setMessageContent(link);
+
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      const shareableLink = `sms:&body=${encodeURIComponent(link)}`;
+      window.location.href = shareableLink;
+    } else {
+      const webShareableLink = `sms:?body=${encodeURIComponent(link)}`;
+      window.open(webShareableLink, "_blank");
     }
   };
 
@@ -175,7 +204,11 @@ function SelectedFilesList({ selectedFiles }) {
             </div>
           </button>
           <div className=" h-[2px] bg-yellow-400 "></div>
-          <button className="flex gap-4 items-center px-2 py-2 bg-slate-400">
+          <button
+            className="flex gap-4 items-center px-2 py-2 bg-slate-400"
+            id="message-btn"
+            onClick={handleMessageClick}
+          >
             <div id="icon">
               <IoChatbubblesOutline size={32} round />
             </div>
@@ -262,6 +295,20 @@ function SelectedFilesList({ selectedFiles }) {
               <WhatsappIcon size={32} round />
             </div>
             <button onClick={handleClickForWhatsapp}>Share on WhatsApp</button>
+          </button>
+        </div>
+      )}
+
+      {showMessage && (
+        <div className="bg-slate-400 flex flex-col items-center w-full md:basis-1/3 pt-2 md:pt-0">
+          <button
+            className="flex gap-4 items-center px-2 py-2 bg-slate-400 flex-col"
+            onClick={handleClickForMessage}
+          >
+            <div id="icon">
+              <IoChatbubblesOutline size={32} round />
+            </div>
+            <button onClick={handleClickForMessage}>Share on Message</button>
           </button>
         </div>
       )}
