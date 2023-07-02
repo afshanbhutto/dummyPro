@@ -107,19 +107,44 @@ function SelectedFilesList({ selectedFiles }) {
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+  // const handleClickForWhatsapp = () => {
+  //   if (isMobile) {
+  //     const shareableUrl = `whatsapp://send?text=${encodeURIComponent(
+  //       `${title} - ${url}`
+  //     )}`;
+  //     window.location.href = shareableUrl;
+  //   } else {
+  //     const webShareableUrl = `https://web.whatsapp.com/send?text=${encodeURIComponent(shareableUrl)}`;
+  //     window.open(webShareableUrl, "_blank");
+  //   }
+  // };
   const handleClickForWhatsapp = () => {
-    if (isMobile) {
-      const shareableUrl = `whatsapp://send?text=${encodeURIComponent(
-        `${title} - ${url}`
-      )}`;
-      window.location.href = shareableUrl;
-    } else {
-      const webShareableUrl = `https://web.whatsapp.com/send?text=${encodeURIComponent(
-        `${title} - ${url}`
-      )}`;
+    const isWhatsAppInstalled = navigator.userAgent.match(/WhatsApp/i);
+    const isWindows = navigator.platform.includes("Win");
+    const isMac = navigator.platform.includes("Mac");
+  
+    const openWhatsAppApp = () => {
+      const mobileShareableUrl = `whatsapp://send?text=${encodeURIComponent(url)}`;
+      window.location.href = mobileShareableUrl;
+    };
+  
+    const openWhatsAppWeb = () => {
+      const webShareableUrl = `https://web.whatsapp.com/send?text=${encodeURIComponent(url)}`;
       window.open(webShareableUrl, "_blank");
+    };
+  
+    if (isMobile) {
+      openWhatsAppApp();
+    } else if (isWhatsAppInstalled && (isWindows || isMac)) {
+      const isDesktopAppOpened = confirm("Please open the WhatsApp desktop app manually. Do you want to continue to WhatsApp Web instead?");
+      if (isDesktopAppOpened) {
+        openWhatsAppWeb();
+      }
+    } else {
+      openWhatsAppWeb();
     }
   };
+  
 
   const handleClickForMessage = () => {
     const link = "https://example.com/qr-code";

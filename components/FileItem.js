@@ -2,7 +2,7 @@ import React from "react";
 import { FaFile, FaFolder, FaFilm } from "react-icons/fa";
 
 function FileItem({ file }) {
-  const fileName = file.path.split("/").pop();
+  const fileName = file.path ? file.path.split("/").pop() : "Unknown";
   const fileType = file.type || "folder";
 
   function getFileIcon(fileType) {
@@ -25,9 +25,11 @@ function FileItem({ file }) {
 
   return (
     <div className="container mx-auto  bg-slate-300 flex flex-wrap items-center justify-center">
-      {getFileIcon(fileType)}
-      <span className="flex-1">{fileName}</span>
-      <span className="flex-1 ">{` (${fileType})`}</span>
+      <div className="file-icon">{getFileIcon(fileType)}</div>
+      <div className="file-details">
+        <div className="file-name">{fileName}</div>
+        <div className="file-type">{fileType}</div>
+      </div>
       {fileType === "folder" && displayFolderCount(file.path)}
     </div>
   );
